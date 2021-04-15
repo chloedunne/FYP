@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "825240466486",
+    "firebase_url": "https://beautyappfyp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "beautyappfyp",
+    "storage_bucket": "beautyappfyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825240466486:android:c7a2e612674c50c58e1497",
+        "android_client_info": {
+          "package_name": "com.example.fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825240466486-f7icbfsgieqo3c396jap61kssk46mfu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLFywGDPqpMmW3Tj6bJjBepTEh3ugvLs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825240466486-f7icbfsgieqo3c396jap61kssk46mfu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_peach">
+
+    <ImageView
+        android:id="@+id/logo_view_review_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/peach"
+        android:padding="5dp"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <TextView
+        android:id="@+id/productText"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/logo_view_review_activity"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/biryani"
+        android:gravity="center"
+        android:text="Product Name"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="none" />
+
+    <TextView
+        android:id="@+id/productBrandText"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/productText"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/biryani_light"
+        android:gravity="center"
+        android:inputType="textCapWords"
+        android:text="Brand Text"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:autoSizeTextType="none" />
+
+    <ImageView
+        android:id="@+id/productImage1"
+        android:layout_width="250dp"
+        android:layout_height="195dp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/productBrandText"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/no_photos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/shadeTextView"
+        android:layout_below="@id/productImage1"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/biryani_light"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/shadeTextView"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_img"
+        app:srcCompat="@drawable/ic_baseline_person_outline_24"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/usernameTextViewReview"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_extralight"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:text="Reviewed by "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/shadeTextView"
+        android:layout_toRightOf="@id/imageViewProfile"
+
+        />
+
+    <RatingBar
+        android:id="@+id/ratingBarReviewReview"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:isIndicator="true"
+        android:layout_marginLeft="10dp"
+        android:numStars="5"
+        android:layout_marginTop="20dp"
+        android:progressTint="@color/peach"
+        android:secondaryProgressTint="@color/peach"
+        android:layout_toRightOf="@id/ratingTextView"
+        android:stepSize="0.5"
+        android:layout_below="@id/usernameTextViewReview"
+        />
+
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/biryani_light"
+        android:text="Rating"
+        android:layout_below="@id/imageViewProfile"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/ReviewTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBarReviewReview"
+        android:fontFamily="@font/biryani_light"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:text="Review:"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_below="@id/ReviewTextView"
+        android:background="@drawable/review_box"
+        android:fontFamily="@font/biryani_extralight"
+        android:padding="7dp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        />
+
+</RelativeLayout>

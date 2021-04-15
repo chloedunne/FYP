@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="20dp"
+    android:background="@drawable/round_item">
+
+
+    <ImageView
+        android:id="@+id/imageViewBB"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_img"
+        android:layout_margin="5dp"
+        android:layout_alignParentLeft="true"
+        app:srcCompat="@drawable/cosmetics" />
+
+    <TextView
+        android:id="@+id/nameTextViewBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:fontFamily="@font/biryani"
+        android:text="Product Name"
+        android:layout_toRightOf="@id/imageViewBB"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/brandTextViewBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/biryani_light"
+        android:text="Brand"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_below="@id/nameTextViewBB"
+        android:layout_toRightOf="@id/imageViewBB"/>
+    <TextView
+        android:id="@+id/shadeTextViewBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/biryani_light"
+        android:text="Shade"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_below="@id/brandTextViewBB"
+        android:layout_toRightOf="@id/imageViewBB"/>
+
+
+</RelativeLayout>

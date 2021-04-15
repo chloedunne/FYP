@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_item"
+    android:elevation="20dp"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_centerHorizontal="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/screenshot_2021_04_02_at_13_01_29"
+        android:elevation="15dp"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:id="@+id/productNameTxt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productImage"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/biryani_light"
+        android:gravity="center_horizontal"
+        android:text="Product Name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/brandNameTxt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productNameTxt"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:inputType="textCapWords"
+        android:fontFamily="@font/biryani_extralight"
+        android:gravity="center_horizontal"
+        android:text="Brand Name"
+        android:textAlignment="center"
+        android:textColor="@color/peach"
+        android:textSize="14sp" />
+
+</RelativeLayout>

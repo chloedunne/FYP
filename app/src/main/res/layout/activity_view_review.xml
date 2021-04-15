@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/peach"
+    tools:context=".ViewReviewActivity">
+
+    <ImageView
+        android:id="@+id/logo_view_reviews_activity"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviewsRCV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peach"
+        android:layout_below="@id/textViewReview" />
+
+    <TextView
+        android:id="@+id/textViewReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Reviews"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/logo_view_reviews_activity"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

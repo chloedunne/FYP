@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/logo_review_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/screenshot_2020_10_27_at_20_42_14" />
+
+    <TextView
+        android:id="@+id/CreateReviewTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_review_activity"
+        android:layout_centerInParent="true"
+        android:textColor="@color/peach"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/biryani"
+        android:text="Create Review" />
+
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_light"
+        android:text="Rating"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/peach"
+        android:textSize="16sp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/CreateReviewTextView"
+        />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:elevation="5dp"
+        android:numStars="5"
+        android:progressTint="@color/peach"
+        android:stepSize="0.5"
+        android:layout_below="@id/ratingTextView"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/textViewReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_light"
+        android:text="Review"
+        android:textColor="@color/peach"
+        android:layout_marginTop="25dp"
+        android:textSize="16sp"
+        android:layout_below="@id/rating_bar"
+        android:layout_centerInParent="true"/>
+
+    <EditText
+        android:id="@+id/editTextReview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/review_box"
+        android:fontFamily="@font/biryani_extralight"
+        android:gravity="start"
+        android:inputType="textPersonName"
+        android:textColor="@color/peach"
+        android:textColorHighlight="@color/peach"
+        android:textColorLink="@color/peach"
+        android:textCursorDrawable="@color/peach"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:layout_below="@id/textViewReview"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"/>
+
+    <Button
+        android:id="@+id/submitReviewButton"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_btn"
+        android:text="Submit Review"
+        android:textSize="12sp"
+        app:backgroundTint="@color/peach"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        />
+
+
+
+
+
+</RelativeLayout>

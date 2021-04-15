@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/peach">
+
+    <ImageView
+        android:id="@+id/logo_shade_match_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <ImageView
+        android:id="@+id/faceImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_shade_match_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/light_peach"
+        app:srcCompat="@drawable/ic_baseline_person_outline_24" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Shade Matches"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/faceImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/matchRCV"
+        android:layout_width="match_parent"
+        android:clickable="false"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+</RelativeLayout>

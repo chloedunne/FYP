@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/logo_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/screenshot_2020_10_27_at_20_42_14" />
+
+    <EditText
+        android:id="@+id/registerUsernameEditText"
+        android:layout_width="325dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:hint="Username"
+        android:layout_below="@id/logo_register_activity" />
+
+    <EditText
+        android:id="@+id/registerFirstNameEditText"
+        android:layout_width="325dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_below="@id/registerUsernameEditText"
+        android:hint="First Name"
+       />
+
+    <EditText
+        android:id="@+id/registerSurnameEditText"
+        android:hint="Surname"
+        android:layout_width="325dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_below="@id/registerFirstNameEditText"/>
+
+
+    <EditText
+        android:id="@+id/registerEditTextTextEmailAddress"
+        android:layout_width="325dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/registerSurnameEditText" />
+
+    <EditText
+        android:id="@+id/registerEditTextTextPassword"
+        android:layout_width="325dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_below="@id/registerEditTextTextEmailAddress" />
+
+    <EditText
+        android:id="@+id/registerEditTextTextPassword2"
+        android:layout_width="325dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_below="@id/registerEditTextTextPassword"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FC6161"
+        android:text="Register"
+        android:textColorLink="@color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@color/peach"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
+</RelativeLayout>

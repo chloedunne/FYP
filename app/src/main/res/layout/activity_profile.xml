@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/peach">
+
+    <ImageView
+        android:id="@+id/logo_profile_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/peach"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_04_46" />
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@drawable/round_img"
+        android:elevation="20dp"
+        android:layout_below="@id/logo_profile_activity"
+        app:srcCompat="@drawable/ic_baseline_person_outline_24"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="username"
+        android:elevation="15dp"
+        android:fontFamily="@font/biryani"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@+id/profileImage"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/browseProductsBtn"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_marginLeft="65dp"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@id/usernameText"
+        app:srcCompat="@drawable/cosmetics" />
+
+    <TextView
+        android:id="@+id/BrowseProducts"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_width="170dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="Browse Products"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        android:layout_below="@id/browseProductsBtn" />
+
+    <ImageButton
+        android:id="@+id/reviewBtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="65dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/usernameText"
+        app:srcCompat="@drawable/review" />
+
+    <TextView
+        android:id="@+id/Reviews"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginRight="65dp"
+        android:layout_width="170dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="Reviews"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        android:layout_below="@id/reviewBtn"
+        android:layout_alignParentRight="true"/>
+
+    <ImageButton
+        android:id="@+id/shadeMatchBtn"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="50dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/BrowseProducts"
+        app:srcCompat="@drawable/mirror" />
+
+    <TextView
+        android:id="@+id/ShadeMatch"
+        android:textColor="@color/white"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_width="170dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="Shade Match"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        android:layout_below="@id/shadeMatchBtn" />
+
+    <ImageButton
+        android:id="@+id/settingsBtn"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="65dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/BeautyBagTxt"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageButton
+        android:id="@+id/BeautyBagBtn"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="65dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/makeup_bag"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/Reviews"
+        android:tint="@color/peach"
+        />
+
+    <TextView
+        android:id="@+id/Settings"
+        android:textColor="@color/white"
+        android:layout_marginRight="65dp"
+        android:layout_width="170dp"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settingsBtn"
+        android:layout_alignParentRight="true"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="Settings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        />
+
+    <TextView
+        android:id="@+id/BeautyBagTxt"
+        android:textColor="@color/white"
+        android:layout_marginRight="65dp"
+        android:layout_width="170dp"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/BeautyBagBtn"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="My Beauty Bag"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        android:layout_alignParentRight="true" />
+
+
+
+</RelativeLayout>

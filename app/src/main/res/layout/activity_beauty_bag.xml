@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/peach"
+    tools:context=".BeautyBagActivity">
+
+    <ImageView
+        android:id="@+id/logo_beauty_bag_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <TextView
+        android:id="@+id/textViewBeautyBag"
+        android:layout_width="108dp"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Beauty Bag"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/logo_beauty_bag_activity"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewBeautyBag"
+        android:layout_marginTop="5dp"
+        >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/beautyBagRCV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

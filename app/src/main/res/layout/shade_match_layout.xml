@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/shadeTextView"
+        android:layout_width="85dp"
+        android:layout_height="60dp"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/brandTextViewSM"
+        android:layout_width="326dp"
+        android:layout_height="31dp"
+        android:layout_toRightOf="@id/shadeTextView"
+        android:fontFamily="@font/biryani"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/productTextViewSM"
+        android:layout_width="326dp"
+        android:layout_height="31dp"
+        android:layout_below="@id/brandTextViewSM"
+        android:layout_toRightOf="@id/shadeTextView"
+        android:fontFamily="@font/biryani_light"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="10dp"/>
+
+
+</RelativeLayout>

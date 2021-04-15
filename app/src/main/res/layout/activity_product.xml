@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_peach">
+
+
+    <ImageView
+        android:id="@+id/logo_product_activity"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/peach"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <TextView
+        android:id="@+id/productText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_product_activity"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/biryani"
+        android:gravity="center"
+        android:text="Product Name"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="none" />
+
+    <ImageView
+        android:id="@+id/productImage1"
+        android:layout_width="250dp"
+        android:layout_height="195dp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/productBrandText"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/no_photos" />
+
+
+    <TextView
+        android:id="@+id/productBrandText"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/productText"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/biryani_light"
+        android:gravity="center"
+        android:inputType="textCapWords"
+        android:text="Brand Text"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:autoSizeTextType="none" />
+
+    <TextView
+        android:id="@+id/textViewShade"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/productImage1"
+        android:fontFamily="@font/biryani_light"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:autoSizeTextType="none" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shadeRCV"
+        android:layout_width="match_parent"
+        android:layout_below="@id/textViewShade"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="65dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBarReviewReview"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:isIndicator="true"
+        android:layout_below="@id/shadeRCV"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:numStars="5"
+        android:progressTint="@color/peach"
+        android:stepSize="0.5"
+        />
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Avg Rating (Based on 0 Reviews)"
+        android:layout_below="@id/ratingBarReviewReview"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        />
+
+    <Button
+        android:id="@+id/favouriteButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/ratingTextView"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_baseline_favorite_border_24"
+        app:backgroundTint="@color/peach"
+        />
+
+    <TextView
+        android:id="@+id/favouriteTextView"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Add to Beauty Bag"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_below="@id/ratingTextView"
+        android:layout_toRightOf="@id/favouriteButton" />
+
+    <Button
+        android:id="@+id/createReviewButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/review"
+        app:backgroundTint="@color/peach"
+        android:layout_below="@id/ratingTextView"
+        android:layout_toLeftOf="@id/ReviewTextView"/>
+
+    <TextView
+        android:id="@+id/ReviewTextView"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/ratingTextView"
+        android:layout_alignParentRight="true"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Create Review"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        />
+
+    <Button
+        android:id="@+id/tryOnButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/favouriteButton"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/complexion"
+        app:backgroundTint="@color/peach"
+        />
+
+    <TextView
+        android:id="@+id/tryOnTextView"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Try this product on"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_below="@id/favouriteTextView"
+        android:layout_toRightOf="@id/favouriteButton" />
+
+
+</RelativeLayout>

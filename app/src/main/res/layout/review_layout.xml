@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:background="@drawable/round_item">
+
+    <ImageView
+        android:id="@+id/imageViewReviewRCV"
+        android:layout_width="100dp"
+        android:layout_margin="5dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_img"
+        app:srcCompat="@drawable/round_img" />
+
+    <RatingBar
+        android:id="@+id/ratingBarReview"
+        android:layout_marginTop="5dp"
+        style="@android:style/Widget.Material.RatingBar.Indicator"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:progressTint="@color/peach"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/textViewProductNameRCV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imageViewReviewRCV"
+        android:fontFamily="@font/biryani"
+        android:gravity="center"
+        android:text="Product Name"
+        android:textColor="@color/peach"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewBrandNameRCV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_light"
+        android:layout_marginTop="5dp"
+        android:text="Brand"
+        android:textSize="14sp"
+        android:layout_below="@id/textViewProductNameRCV"
+        android:layout_toRightOf="@id/imageViewReviewRCV"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shadeNameTextViewRCV"
+        android:text="Shade"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/biryani_light"
+        android:layout_below="@id/textViewBrandNameRCV"
+        android:layout_toRightOf="@id/imageViewReviewRCV"/>
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shade_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="65dp"
+    android:layout_gravity="center_horizontal"
+    android:rotationX="0">
+
+<TextView
+    android:id="@+id/colour_shade"
+    android:layout_width="45dp"
+    android:layout_centerHorizontal="true"
+    android:layout_height="40dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:id="@+id/name_shade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colour_shade"
+        android:layout_centerInParent="true"
+        android:paddingHorizontal="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center"
+        android:text="Shade Name"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+
+</RelativeLayout>
