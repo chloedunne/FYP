@@ -34,7 +34,7 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView profilePic;
-    private ImageButton browseBtn, beautyBagBtn, reviewBtn, shadeMatchBtn;
+    private ImageButton browseBtn, beautyBagBtn, reviewBtn, shadeMatchBtn, cartBtn;
     private Uri imageUri;
     private TextView usernameText;
     private DatabaseReference userReference;
@@ -54,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
         beautyBagBtn = findViewById(R.id.BeautyBagBtn);
         reviewBtn = findViewById(R.id.reviewBtn);
         shadeMatchBtn = findViewById(R.id.shadeMatchBtn);
+        cartBtn = findViewById(R.id.CartBtn);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userReference =  FirebaseDatabase.getInstance().getReference("Profiles").child(user.getUid());
@@ -114,6 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, ShadeMatchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });

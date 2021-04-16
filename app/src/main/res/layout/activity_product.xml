@@ -179,5 +179,30 @@
         android:layout_below="@id/favouriteTextView"
         android:layout_toRightOf="@id/favouriteButton" />
 
+    <Button
+        android:id="@+id/addToCartButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shopping_cart"
+        app:backgroundTint="@color/peach"
+        android:layout_below="@id/createReviewButton"
+        android:layout_toLeftOf="@id/cartTextView"/>
+
+    <TextView
+        android:id="@+id/cartTextView"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/createReviewButton"
+        android:layout_alignParentRight="true"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Add To Cart"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        />
+
 
 </RelativeLayout>

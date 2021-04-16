@@ -35,8 +35,8 @@ import java.util.ArrayList;
 public class ProductActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private TextView brandText, ratingTextView, productText, favouriteText, shadeText;
-    private Button favouriteButton, createReviewButton, tryOnButton;
+    private TextView brandText, ratingTextView, productText, favouriteText, shadeText, cartText;
+    private Button favouriteButton, createReviewButton, tryOnButton, cartButton;
     private ArrayList<Shade> shadeList = new ArrayList<Shade>();
     private RatingBar ratingBarReviewReview;
     private RecyclerAdapterShades.RecyclerViewClickListener clickListener;
@@ -44,7 +44,7 @@ public class ProductActivity extends AppCompatActivity {
     private boolean found = false;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private DatabaseReference beautyBagRef, reviewRef;
+    private DatabaseReference beautyBagRef, reviewRef, cartRef;
     private int reviewCounter = 0;
     private double reviewTotal = 0;
     private RecyclerAdapterShades adapter;
@@ -60,6 +60,7 @@ public class ProductActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         beautyBagRef = FirebaseDatabase.getInstance().getReference("Beauty Bag").child(user.getUid());
+        cartRef = FirebaseDatabase.getInstance().getReference("Cart").child(user.getUid());
 
         RecyclerView recyclerView = findViewById(R.id.shadeRCV);
         ratingTextView = findViewById(R.id.ratingTextView);
@@ -72,6 +73,8 @@ public class ProductActivity extends AppCompatActivity {
         createReviewButton = findViewById(R.id.createReviewButton);
         tryOnButton = findViewById(R.id.tryOnButton);
         shadeText = findViewById(R.id.textViewShade);
+        cartText = findViewById(R.id.cartTextView);
+        cartButton = findViewById(R.id.addToCartButton);
 
         if (product.getShades() != null) {
             setOnClickListener();
@@ -178,6 +181,22 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedProduct!=null){
+                    String keyId = cartRef.push().getKey();
+                    cartRef.child(keyId).setValue(selectedProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(ProductActivity.this, selectedProduct.getName() + " added to Cart", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else
+                    Toast.makeText(ProductActivity.this, "Please select a product shade", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     public void removeFromBeautyBag(String ref) {
@@ -209,7 +228,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 selectedShade = shadeList.get(position);
-                selectedProduct = new Product(product.getBrand(), product.getName(), product.getDescription(), product.getProductType(), product.getImg(), selectedShade, product.getId());
+                selectedProduct = new Product(product.getBrand(), product.getName(), product.getDescription(), product.getProductType(), product.getImg(), selectedShade, product.getId(), product.getPrice());
                 adapter.setCheckedPosition(position);
                 adapter.notifyDataSetChanged();
 

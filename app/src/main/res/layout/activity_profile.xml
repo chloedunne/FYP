@@ -161,6 +161,23 @@
         android:tint="@color/peach"
         />
 
+    <ImageButton
+        android:id="@+id/CartBtn"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="65dp"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_item"
+        android:elevation="15dp"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/shopping_cart"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/ShadeMatch"
+        android:tint="@color/peach"
+        />
+
     <TextView
         android:id="@+id/Settings"
         android:textColor="@color/white"
@@ -193,6 +210,21 @@
         android:textStyle="bold"
         app:autoSizeTextType="uniform"
         android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/ViewCart"
+        android:textColor="@color/white"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_width="170dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="ViewCart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        android:layout_below="@id/CartBtn" />
 
 
 

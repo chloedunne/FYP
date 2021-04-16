@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.adapters.RecyclerAdapterBeautyBag;
@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BeautyBagActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FirebaseUser user;
@@ -34,18 +34,22 @@ public class BeautyBagActivity extends AppCompatActivity {
     private ArrayList<Product> productList = new ArrayList<Product>();
     private RecyclerAdapterBeautyBag adapter;
     private DatabaseReference dbRef;
+    private double total;
+    private TextView totalTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beauty_bag);
-        Intent intent = getIntent();
+        setContentView(R.layout.activity_cart);
 
+        Intent intent = getIntent();
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        recyclerView = findViewById(R.id.beautyBagRCV);
-        dbRef = FirebaseDatabase.getInstance().getReference("Beauty Bag").child(user.getUid());
+        recyclerView = findViewById(R.id.cartRCV);
+        totalTextView = findViewById(R.id.totalPriceTextView);
+        dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(user.getUid());
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,16 +57,18 @@ public class BeautyBagActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Product p = child.getValue(Product.class);
                     productList.add(p);
+                    total = total + p.getPrice();
+                    totalTextView.setText("Total: " + String.valueOf(total));
                 }
                 setOnClickListener();
                 adapter = new RecyclerAdapterBeautyBag(productList, clickListener);
-                recyclerView.setLayoutManager(new LinearLayoutManager(BeautyBagActivity.this));
+                recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(adapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(BeautyBagActivity.this, "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -74,7 +80,7 @@ public class BeautyBagActivity extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 Product product = productList.get(position);
-                Intent i = new Intent(BeautyBagActivity.this, ProductActivity.class);
+                Intent i = new Intent(CartActivity.this, ProductActivity.class);
                 i.putExtra("product", (Serializable) product);
                 startActivity(i);
 

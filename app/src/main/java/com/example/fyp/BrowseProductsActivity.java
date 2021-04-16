@@ -194,6 +194,11 @@ public class BrowseProductsActivity extends AppCompatActivity {
                             String description = jsonObject.getString("description");
                             String productType = jsonObject.getString("product_type");
                             String image = jsonObject.getString("image_link");
+                            String stringPrice = jsonObject.getString("price");
+                            double price = 0;
+                            if(stringPrice != null && !stringPrice.equals("null")){
+                                price = Double.parseDouble(stringPrice);
+                            }
                             JSONArray shades = jsonObject.getJSONArray("product_colors");
                             for (int x = 0; x < shades.length(); x++) {
                                 JSONObject shadeDetails = shades.getJSONObject(x);
@@ -202,7 +207,7 @@ public class BrowseProductsActivity extends AppCompatActivity {
                                 Shade shade = new Shade(shadeName, colour);
                                 shadesArray.add(shade);
                             }
-                            Product product = new Product(brand, name, description, productType, image, shadesArray, id);
+                            Product product = new Product(brand, name, description, productType, image, shadesArray, id, price);
                             productList.add(product);
                             adapter.notifyDataSetChanged();
 

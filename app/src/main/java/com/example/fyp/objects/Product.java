@@ -10,13 +10,14 @@ public class Product implements Serializable {
     private String description;
     private String productType;
     private Shade shade;
+    private double price;
     private ArrayList<Shade> shades;
     private String img;
     private int id;
 
     public Product(){}
 
-    public Product(String brand, String name, String description, String productType, String img, ArrayList<Shade> shades, int id) {
+    public Product(String brand, String name, String description, String productType, String img, ArrayList<Shade> shades, int id, double price) {
         this.brand = brand;
         this.name = name;
         this.description = description;
@@ -24,9 +25,10 @@ public class Product implements Serializable {
         this.img = img;
         this.shades = shades;
         this.id = id;
+        this.price = price;
     }
 
-    public Product(String brand, String name, String description, String productType, String img, Shade shade, int id) {
+    public Product(String brand, String name, String description, String productType, String img, Shade shade, int id, double price) {
         this.brand = brand;
         this.name = name;
         this.description = description;
@@ -34,6 +36,7 @@ public class Product implements Serializable {
         this.img = img;
         this.shade = shade;
         this.id = id;
+        this.price = price;
     }
 
 
@@ -99,5 +102,13 @@ public class Product implements Serializable {
 
     public void setShade(Shade shade) {
         this.shade = shade;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

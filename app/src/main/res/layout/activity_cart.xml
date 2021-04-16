@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/peach"
+    tools:context=".CartActivity">
+
+    <ImageView
+        android:id="@+id/logo_cart_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+
+    <TextView
+        android:id="@+id/textViewCart"
+        android:layout_width="108dp"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Cart"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_below="@id/logo_cart_activity"
+        android:layout_centerHorizontal="true"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartRCV"
+            android:layout_below="@id/textViewCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@id/totalPriceTextView"
+            />
+
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Total: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_above="@id/checkoutButton"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/checkoutButton"
+        android:elevation="50dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FC6161"
+        android:text="Proceed to Checkout"
+        android:textColorLink="@color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@color/peach"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"/>
+
+
+</RelativeLayout>
