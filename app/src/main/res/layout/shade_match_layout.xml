@@ -6,14 +6,15 @@
 
     <TextView
         android:id="@+id/shadeTextView"
-        android:layout_width="85dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:padding="10dp" />
 
     <TextView
         android:id="@+id/brandTextViewSM"
-        android:layout_width="326dp"
-        android:layout_height="31dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/shadeTextView"
         android:fontFamily="@font/biryani"
         android:text="TextView"
@@ -23,9 +24,23 @@
 
     <TextView
         android:id="@+id/productTextViewSM"
-        android:layout_width="326dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/brandTextViewSM"
+        android:layout_toRightOf="@id/shadeTextView"
+        android:fontFamily="@font/biryani_light"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/shadeTextViewSM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/productTextViewSM"
         android:layout_toRightOf="@id/shadeTextView"
         android:fontFamily="@font/biryani_light"
         android:text="TextView"

@@ -9,20 +9,21 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp.R;
+import com.example.fyp.objects.Product;
 import com.example.fyp.objects.ShadeMatch;
 
 import java.util.ArrayList;
 
 public class RecyclerAdapterShadeMatches extends RecyclerView.Adapter<RecyclerAdapterShadeMatches.MyViewHolder> {
 
-    private ArrayList<ShadeMatch> list;
+    private ArrayList<Product> list;
 
-    public RecyclerAdapterShadeMatches(ArrayList<ShadeMatch>  list){
+    public RecyclerAdapterShadeMatches(ArrayList<Product>  list){
         this.list = list;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView productNameTxt, brandNameTxt, shadeTxt;
+        public TextView productNameTxt, brandNameTxt, shadeTxt, shadeName;
 
 
         public MyViewHolder(View itemView) {
@@ -31,6 +32,7 @@ public class RecyclerAdapterShadeMatches extends RecyclerView.Adapter<RecyclerAd
             productNameTxt = itemView.findViewById(R.id.productTextViewSM);
             brandNameTxt = itemView.findViewById(R.id.brandTextViewSM);
             shadeTxt = itemView.findViewById(R.id.shadeTextView);
+            shadeName = itemView.findViewById(R.id.shadeTextViewSM);
         }
     }
 
@@ -42,11 +44,12 @@ public class RecyclerAdapterShadeMatches extends RecyclerView.Adapter<RecyclerAd
 
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ShadeMatch current = list.get(position);
+        Product current = list.get(position);
 
-        holder.productNameTxt.setText(current.getProduct());
+        holder.productNameTxt.setText(current.getName());
         holder.brandNameTxt.setText(current.getBrand());
-        holder.shadeTxt.setBackgroundColor(Color.parseColor(current.getHex()));
+        holder.shadeTxt.setBackgroundColor(Color.parseColor(current.getShade().getColour()));
+        holder.shadeName.setText(current.getShade().getName());
 
     }
 
@@ -54,7 +57,7 @@ public class RecyclerAdapterShadeMatches extends RecyclerView.Adapter<RecyclerAd
         return list.size();
     }
 
-    public void addItemtoEnd(ShadeMatch shadeMatch){
+    public void addItemtoEnd(Product shadeMatch){
         list.add(shadeMatch);
         notifyItemInserted(list.size());
     }

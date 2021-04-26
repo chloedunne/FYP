@@ -28,8 +28,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fyp.adapters.RecyclerAdapterShadeMatches;
+import com.example.fyp.objects.Product;
 import com.example.fyp.objects.Shade;
 import com.example.fyp.objects.ShadeMatch;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +39,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.gson.JsonObject;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceDetection;
@@ -62,15 +65,14 @@ public class ShadeMatchActivity extends AppCompatActivity {
     private Canvas canvas;
     private FirebaseAuth mAuth;
     private ArrayList<Shade> shadeList = new ArrayList<Shade>();
-    private ArrayList<ShadeMatch> shadeMatchList = new ArrayList<ShadeMatch>();
     private PointF leftPoint = null;
     private PointF rightPoint = null;
     private String rightColour = null;
     private String leftColour = null;
-    private String closestId = null;
+    private Shade closest = null;
     private RecyclerAdapterShadeMatches adapter;
     private RecyclerView recyclerView;
-
+    private ArrayList<Product> shadeMatches = new ArrayList<Product>();
 
 
     @Override
@@ -82,7 +84,7 @@ public class ShadeMatchActivity extends AppCompatActivity {
         imageView = findViewById(R.id.faceImageView);
         recyclerView = findViewById(R.id.matchRCV);
 
-        adapter = new RecyclerAdapterShadeMatches(shadeMatchList);
+        adapter = new RecyclerAdapterShadeMatches(shadeMatches);
         recyclerView.setLayoutManager(new LinearLayoutManager(ShadeMatchActivity.this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
@@ -142,14 +144,14 @@ public class ShadeMatchActivity extends AppCompatActivity {
                                                 if (leftCheek != null) {
                                                     leftPoint = leftCheek.getPosition();
                                                     leftColour = findColour(leftPoint);
-                                                    String leftShade = closestShade(leftPoint);
-                                                    getProductByShade(leftShade);
+                                                    Shade leftShade = closestShade(leftPoint);
+                                                     getProductByShade(leftShade);
                                                 }
                                                 if (rightCheek != null) {
                                                     rightPoint = rightCheek.getPosition();
                                                     rightColour = findColour(rightPoint);
-                                                    String rightShade = closestShade(rightPoint);
-                                                    getProductByShade(rightShade);
+                                                    Shade rightShade = closestShade(rightPoint);
+                                                     getProductByShade(rightShade);
                                                 }
                                                 canvas.drawRect(rect, rectPaint);
                                                 imageView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
@@ -179,29 +181,42 @@ public class ShadeMatchActivity extends AppCompatActivity {
         return hex;
     }
 
-    public void getProductByShade(String shade){
+    public void getProductByShade(Shade shadeMatch) {
 
-        String shadeHex = shade.substring(1);
+        int productId = shadeMatch.getId();
 
         RequestQueue queue = Volley.newRequestQueue(ShadeMatchActivity.this);
 
-        String stringUrl = "https://makeup-shades-api.herokuapp.com/shades/hex/" + shadeHex;
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, stringUrl, null, new Response.Listener<JSONArray>() {
+        String stringUrl = "https://makeup-api.herokuapp.com/api/v1/products/" + productId + ".json";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringUrl, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject obj = response.getJSONObject(i);
-                        String brand = obj.getString("brand");
-                        String product = obj.getString("product");
-                        String hex = obj.getString("hex");
-                        hex = "#" + hex;
-                        ShadeMatch shadeMatch = new ShadeMatch(brand, product, hex);
-                        shadeMatchList.add(shadeMatch);
-                        adapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            public void onResponse(JSONObject obj) {
+                try {
+                    int id = obj.getInt("id");
+                    String brand = obj.getString("brand");
+                    String name = obj.getString("name");
+                    String description = obj.getString("description");
+                    String productType = obj.getString("product_type");
+                    String image = obj.getString("image_link");
+                    String stringPrice = obj.getString("price");
+                    double price = 10.75;
+                    if (stringPrice != null && !stringPrice.equals("null")) {
+                        price = Double.parseDouble(stringPrice);
                     }
+                    JSONArray shades = obj.getJSONArray("product_colors");
+                    for (int x = 0; x < shades.length(); x++) {
+                        JSONObject shadeDetails = shades.getJSONObject(x);
+                        if (shadeDetails.getString("hex_value").equalsIgnoreCase(shadeMatch.getColour())) {
+                            String shadeName = shadeDetails.getString("colour_name");
+                            String colour = shadeDetails.getString("hex_value");
+                            Shade shade = new Shade(shadeName, colour);
+                            Product product = new Product(brand, name, description, productType, image, shade, id, price);
+                            shadeMatches.add(product);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
@@ -219,20 +234,23 @@ public class ShadeMatchActivity extends AppCompatActivity {
     }
 
     public void readData() {
+
         RequestQueue queue = Volley.newRequestQueue(ShadeMatchActivity.this);
 
-        String stringUrl = "https://makeup-shades-api.herokuapp.com/shades";
+        String stringUrl = "https://makeup-api.herokuapp.com/api/v1/products.json?product_type=foundation";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, stringUrl, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        String id = obj.getString("_id");
-                        String hex = obj.getString("hex");
-                        if (!hex.equalsIgnoreCase("null") && hex.length() ==6) {
-                            hex = "#" + hex;
-                            Shade shade = new Shade(id, hex);
+                        int id = obj.getInt("id");
+                        JSONArray shades = obj.getJSONArray("product_colors");
+                        for (int x = 0; x < shades.length(); x++) {
+                            JSONObject shadeDetails = shades.getJSONObject(x);
+                            String shadeName = shadeDetails.getString("colour_name");
+                            String hex = shadeDetails.getString("hex_value");
+                            Shade shade = new Shade(shadeName, hex, id);
                             shadeList.add(shade);
                         }
                     } catch (JSONException e) {
@@ -252,7 +270,9 @@ public class ShadeMatchActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
+
     }
+
 
     public void selectPicture() {
         Intent i = new Intent();
@@ -268,7 +288,7 @@ public class ShadeMatchActivity extends AppCompatActivity {
         rectPaint.setStyle(Paint.Style.STROKE);
     }
 
-    public String closestShade(PointF point) {
+    public Shade closestShade(PointF point) {
         double distance = 0;
         double closestDist = 100000;
 
@@ -278,6 +298,7 @@ public class ShadeMatchActivity extends AppCompatActivity {
         int red = Color.red(pixel);
         int green = Color.green(pixel);
         int blue = Color.blue(pixel);
+
 
         for (Shade s : shadeList) {
             String colour = s.getColour();
@@ -289,10 +310,11 @@ public class ShadeMatchActivity extends AppCompatActivity {
 
             if (distance < closestDist) {
                 closestDist = distance;
-                closestId = s.getColour();
+                closest = s;
             }
         }
-        return closestId;
+
+        return closest;
     }
 
 }
