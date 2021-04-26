@@ -27,7 +27,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYP"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".OrderActivity"></activity>
+        <activity android:name=".ViewOrdersActivity"></activity>
+        <activity android:name=".UpdateActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".CheckoutActivity" />
+        <activity android:name=".CartActivity" />
         <activity android:name=".TryOnMakeupActivity" />
         <activity android:name=".ShadeMatchActivity" />
         <activity android:name=".ReviewViewActivity" />

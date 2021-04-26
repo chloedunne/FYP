@@ -7,10 +7,10 @@
     <ImageView
         android:id="@+id/logo_review_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="5dp"
         android:background="@color/white"
-        app:srcCompat="@drawable/screenshot_2020_10_27_at_20_42_14" />
+        app:srcCompat="@drawable/white_top_logo" />
 
     <TextView
         android:id="@+id/CreateReviewTextView"
@@ -88,7 +88,7 @@
         android:textSize="12sp"
         app:backgroundTint="@color/peach"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         />
 
 

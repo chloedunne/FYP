@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_peach">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/logo_view_review_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="5dp"
         android:background="@color/peach"
         android:padding="5dp"
-        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+        app:srcCompat="@drawable/peach_top_logo" />
 
     <TextView
         android:id="@+id/productText"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/logo_view_review_activity"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/biryani"
         android:gravity="center"
         android:text="Product Name"
         android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:autoSizeTextType="none" />
 
     <TextView
         android:id="@+id/productBrandText"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/productText"
         android:layout_centerInParent="true"
         android:fontFamily="@font/biryani_light"
@@ -46,14 +50,17 @@
         android:textSize="14sp"
         app:autoSizeTextType="none" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/productImage1"
-        android:layout_width="250dp"
-        android:layout_height="195dp"
-        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
+        app:riv_corner_radius="10dp"
         android:layout_below="@id/productBrandText"
-        android:layout_centerInParent="true"
-        app:srcCompat="@drawable/no_photos" />
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,7 +106,7 @@
         android:isIndicator="true"
         android:layout_marginLeft="10dp"
         android:numStars="5"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:progressTint="@color/peach"
         android:secondaryProgressTint="@color/peach"
         android:layout_toRightOf="@id/ratingTextView"
@@ -113,7 +120,7 @@
         android:layout_height="24dp"
         android:layout_marginLeft="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/biryani_light"
         android:text="Rating"
         android:layout_below="@id/imageViewProfile"
@@ -127,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ratingBarReviewReview"
         android:fontFamily="@font/biryani_light"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="50dp"
         android:text="Review:"
         android:textColor="@color/white"
@@ -141,11 +148,13 @@
         android:layout_below="@id/ReviewTextView"
         android:background="@drawable/review_box"
         android:fontFamily="@font/biryani_extralight"
-        android:padding="7dp"
+        android:padding="10dp"
         android:text="TextView"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="normal"
+        android:layout_marginBottom="20dp"
         />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -34,7 +34,7 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView profilePic;
-    private ImageButton browseBtn, beautyBagBtn, reviewBtn, shadeMatchBtn, cartBtn;
+    private ImageButton browseBtn, beautyBagBtn, reviewBtn, shadeMatchBtn, cartBtn, settingsBtn;
     private Uri imageUri;
     private TextView usernameText;
     private DatabaseReference userReference;
@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         reviewBtn = findViewById(R.id.reviewBtn);
         shadeMatchBtn = findViewById(R.id.shadeMatchBtn);
         cartBtn = findViewById(R.id.CartBtn);
+        settingsBtn = findViewById(R.id.settingsBtn);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userReference =  FirebaseDatabase.getInstance().getReference("Profiles").child(user.getUid());
@@ -72,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(ProfileActivity.this, "Error unable to retrieve data", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         profileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -126,6 +129,15 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void selectPicture(){

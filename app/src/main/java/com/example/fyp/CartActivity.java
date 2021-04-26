@@ -3,17 +3,20 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.adapters.RecyclerAdapterBeautyBag;
 import com.example.fyp.objects.Product;
+import com.example.fyp.objects.Profile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private double total;
     private TextView totalTextView;
+    private Button checkout;
 
 
     @Override
@@ -50,6 +54,14 @@ public class CartActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.cartRCV);
         totalTextView = findViewById(R.id.totalPriceTextView);
         dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(user.getUid());
+        checkout = findViewById(R.id.checkoutButton);
+
+        setOnClickListener();
+        adapter = new RecyclerAdapterBeautyBag(productList, clickListener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,19 +71,24 @@ public class CartActivity extends AppCompatActivity {
                     productList.add(p);
                     total = total + p.getPrice();
                     totalTextView.setText("Total: " + String.valueOf(total));
+                    adapter.notifyDataSetChanged();
                 }
-                setOnClickListener();
-                adapter = new RecyclerAdapterBeautyBag(productList, clickListener);
-                recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(CartActivity.this, "Error", Toast.LENGTH_LONG).show();
             }
         });
 
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CartActivity.this, CheckoutActivity.class);
+                i.putExtra("total", total);
+                startActivity(i);
+            }
+        });
 
     }
 

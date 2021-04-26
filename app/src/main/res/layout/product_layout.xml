@@ -7,14 +7,14 @@
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/productImage"
         android:layout_centerHorizontal="true"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/screenshot_2021_04_02_at_13_01_29"
         android:elevation="15dp"
         android:scaleType="fitXY"
         />
@@ -38,11 +38,25 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/productNameTxt"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"
         android:inputType="textCapWords"
         android:fontFamily="@font/biryani_extralight"
         android:gravity="center_horizontal"
         android:text="Brand Name"
+        android:textAlignment="center"
+        android:textColor="@color/peach"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brandNameTxt"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:inputType="textCapWords"
+        android:fontFamily="@font/biryani_extralight"
+        android:gravity="center_horizontal"
+        android:text="€"
         android:textAlignment="center"
         android:textColor="@color/peach"
         android:textSize="14sp" />

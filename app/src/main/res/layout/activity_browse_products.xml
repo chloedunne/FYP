@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/logo_browse_products_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@color/peach"
-        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+        app:srcCompat="@drawable/peach_top_logo" />
 
     <SearchView
         android:id="@+id/searchProducts"

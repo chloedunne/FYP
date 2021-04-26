@@ -99,6 +99,18 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        if (confirmPassword.isEmpty()) {
+            editTextConfirmPassword.setError("Confirm Password is required");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
+
+        if(!password.equalsIgnoreCase(confirmPassword)){
+            editTextConfirmPassword.setError("Passwords must match");
+            editTextPassword.requestFocus();
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

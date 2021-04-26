@@ -12,6 +12,7 @@ import com.example.fyp.R;
 import com.example.fyp.objects.Product;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RecyclerAdapterBeautyBag extends RecyclerView.Adapter<RecyclerAdapterBeautyBag.MyViewHolder> {
@@ -27,6 +28,7 @@ public class RecyclerAdapterBeautyBag extends RecyclerView.Adapter<RecyclerAdapt
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView productNameTxt, brandNameTxt, shadeNameTxt;
         public ImageView productImg;
+        public TextView priceTxt;
 
 
         public MyViewHolder(View itemView) {
@@ -36,11 +38,15 @@ public class RecyclerAdapterBeautyBag extends RecyclerView.Adapter<RecyclerAdapt
             brandNameTxt = itemView.findViewById(R.id.brandTextViewBB);
             shadeNameTxt = itemView.findViewById(R.id.shadeTextViewBB);
             productImg = itemView.findViewById(R.id.imageViewBB);
+            priceTxt = itemView.findViewById(R.id.priceTextViewBB);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) {
+                return;
+            }
             listener.onClick(v, getAdapterPosition());
         }
     }
@@ -53,11 +59,16 @@ public class RecyclerAdapterBeautyBag extends RecyclerView.Adapter<RecyclerAdapt
 
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
+
+        DecimalFormat df = new DecimalFormat("###.##");
         Product currentProduct = productList.get(position);
 
         holder.productNameTxt.setText(currentProduct.getName());
         holder.brandNameTxt.setText(currentProduct.getBrand());
-        holder.shadeNameTxt.setText(currentProduct.getShade().getName());
+        if(currentProduct.getShade()!=null) {
+            holder.shadeNameTxt.setText(currentProduct.getShade().getName());
+        }
+        holder.priceTxt.setText("€" + String.valueOf(df.format(currentProduct.getPrice())));
         Picasso.get().load(currentProduct.getImg()).into(holder.productImg);
     }
 

@@ -8,8 +8,8 @@
     <ImageView
         android:id="@+id/logo_login_activity"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/screenshot_2020_10_27_at_20_42_14" />
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/white_top_logo" />
 
     <EditText
         android:id="@+id/loginEditTextTextEmailAddress"
@@ -37,14 +37,13 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@drawable/round_btn"
-        android:backgroundTint="#FC6161"
         android:text="Login"
         android:textColorLink="@color/white"
         android:textSize="14sp"
         app:backgroundTint="@color/peach"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="50dp"/>
 
 
 </RelativeLayout>

@@ -1,231 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/peach">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/logo_profile_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="90dp"
         android:background="@color/peach"
-        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_04_46" />
+        app:srcCompat="@drawable/peach_logo_border"
+        android:layout_marginBottom="10dp"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:background="@drawable/round_img"
-        android:elevation="20dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_below="@id/logo_profile_activity"
-        app:srcCompat="@drawable/ic_baseline_person_outline_24"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/user_"
+        android:elevation="20dp" />
 
     <TextView
         android:id="@+id/usernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:text="username"
         android:elevation="15dp"
         android:fontFamily="@font/biryani"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:layout_below="@+id/profileImage"
         android:layout_centerHorizontal="true"/>
 
-    <ImageButton
-        android:id="@+id/browseProductsBtn"
-        android:layout_marginTop="20dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_marginLeft="65dp"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_below="@id/usernameText"
-        app:srcCompat="@drawable/cosmetics" />
+        android:id="@+id/row1">
 
-    <TextView
-        android:id="@+id/BrowseProducts"
-        android:paddingTop="5dp"
+
+        <ImageButton
+            android:id="@+id/browseProductsBtn"
+            android:background="@drawable/round_item"
+            android:padding="10dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            app:srcCompat="@drawable/cosmetics"/>
+
+        <ImageButton
+            android:id="@+id/shadeMatchBtn"
+            android:padding="10dp"
+            android:background="@drawable/round_item"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            app:srcCompat="@drawable/mirror" />
+
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="65dp"
-        android:layout_width="170dp"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:text="Browse Products"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        android:layout_below="@id/browseProductsBtn" />
+        android:layout_below="@id/row1"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/row2">
+        <TextView
+            android:id="@+id/BrowseProducts"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="Browse Products"/>
 
-    <ImageButton
-        android:id="@+id/reviewBtn"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="65dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/usernameText"
-        app:srcCompat="@drawable/review" />
+        <TextView
+            android:id="@+id/ShadeMatch"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="Shade Match" />
+            />
 
-    <TextView
-        android:id="@+id/Reviews"
-        android:paddingTop="5dp"
+
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:layout_marginRight="65dp"
-        android:layout_width="170dp"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="Reviews"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        android:layout_below="@id/reviewBtn"
-        android:layout_alignParentRight="true"/>
+        android:layout_below="@id/row2"
+        android:id="@+id/row3">
 
-    <ImageButton
-        android:id="@+id/shadeMatchBtn"
-        android:paddingTop="5dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="50dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/BrowseProducts"
-        app:srcCompat="@drawable/mirror" />
+        <ImageButton
+            android:id="@+id/BeautyBagBtn"
+            android:background="@drawable/round_item"
+            android:padding="10dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            android:src="@drawable/makeup_bag"
+            />
 
-    <TextView
-        android:id="@+id/ShadeMatch"
-        android:textColor="@color/white"
-        android:paddingTop="5dp"
+        <ImageButton
+            android:id="@+id/reviewBtn"
+            android:background="@drawable/round_item"
+            android:padding="10dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            app:srcCompat="@drawable/review" />
+
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="65dp"
-        android:layout_width="170dp"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="Shade Match"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        android:layout_below="@id/shadeMatchBtn" />
+        android:layout_below="@id/row3"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/row4">
 
-    <ImageButton
-        android:id="@+id/settingsBtn"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="65dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/BeautyBagTxt"
-        app:srcCompat="@drawable/settings" />
+        <TextView
+            android:id="@+id/BeautyBagTxt"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="My Beauty Bag"
 
-    <ImageButton
-        android:id="@+id/BeautyBagBtn"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="65dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/makeup_bag"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/Reviews"
-        android:tint="@color/peach"
-        />
+            />
 
-    <ImageButton
-        android:id="@+id/CartBtn"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="65dp"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:background="@drawable/round_item"
-        android:elevation="15dp"
-        android:padding="5dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/shopping_cart"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/ShadeMatch"
-        android:tint="@color/peach"
-        />
+        <TextView
+            android:id="@+id/Reviews"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="View Reviews" />
 
-    <TextView
-        android:id="@+id/Settings"
-        android:textColor="@color/white"
-        android:layout_marginRight="65dp"
-        android:layout_width="170dp"
-        android:paddingTop="5dp"
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settingsBtn"
-        android:layout_alignParentRight="true"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="Settings"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        />
+        android:layout_below="@id/row4"
+        android:id="@+id/row5">
 
-    <TextView
-        android:id="@+id/BeautyBagTxt"
-        android:textColor="@color/white"
-        android:layout_marginRight="65dp"
-        android:layout_width="170dp"
-        android:paddingTop="5dp"
+        <ImageButton
+            android:id="@+id/CartBtn"
+            android:background="@drawable/round_item"
+            android:padding="10dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            android:src="@drawable/shopping_cart"
+            />
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:background="@drawable/round_item"
+            android:padding="10dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:elevation="15dp"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="50dp"
+            app:srcCompat="@drawable/settings" />
+
+
+    </TableRow>
+
+
+    <TableRow android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/BeautyBagBtn"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="My Beauty Bag"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        android:layout_alignParentRight="true" />
+        android:layout_below="@id/row5"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/row6">
 
-    <TextView
-        android:id="@+id/ViewCart"
-        android:textColor="@color/white"
-        android:paddingTop="5dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="65dp"
-        android:layout_width="170dp"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="center"
-        android:text="ViewCart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        android:layout_below="@id/CartBtn" />
+        <TextView
+            android:id="@+id/ViewCart"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="View Cart" />
+
+        <TextView
+            android:id="@+id/Settings"
+            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="50dp"
+            android:text="Settings"
+            />
 
 
 
-</RelativeLayout>
+
+    </TableRow>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

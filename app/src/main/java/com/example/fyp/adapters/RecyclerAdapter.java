@@ -14,6 +14,7 @@ import com.example.fyp.R;
 import com.example.fyp.objects.Product;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -31,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView productNameTxt;
         public TextView brandNameTxt;
+        public TextView priceTxt;
         public ImageView productImg;
 
         public MyViewHolder(View itemView) {
@@ -38,6 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             productNameTxt = itemView.findViewById(R.id.productNameTxt);
             brandNameTxt = itemView.findViewById(R.id.brandNameTxt);
+            priceTxt = itemView.findViewById(R.id.priceTxt);
             productImg = itemView.findViewById(R.id.productImage);
             itemView.setOnClickListener(this);
         }
@@ -57,9 +60,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Product currentProduct = productList.get(position);
+        DecimalFormat df = new DecimalFormat("###.##");
 
         holder.productNameTxt.setText(currentProduct.getName());
         holder.brandNameTxt.setText(currentProduct.getBrand());
+        holder.priceTxt.setText("€" + String.valueOf(df.format(currentProduct.getPrice())));
         Picasso.get().load(currentProduct.getImg()).into(holder.productImg);
     }
 

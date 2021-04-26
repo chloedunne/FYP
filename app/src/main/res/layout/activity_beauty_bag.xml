@@ -10,13 +10,13 @@
     <ImageView
         android:id="@+id/logo_beauty_bag_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/peach_top_logo" />
 
     <TextView
         android:id="@+id/textViewBeautyBag"
-        android:layout_width="108dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:fontFamily="@font/biryani_extralight"
         android:text="Beauty Bag"

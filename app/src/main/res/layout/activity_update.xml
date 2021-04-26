@@ -1,88 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <ImageView
-        android:id="@+id/logo_register_activity"
+        android:id="@+id/logo_update_activity"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:srcCompat="@drawable/white_top_logo" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/updateProfileImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/logo_update_activity"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/user_"
+        android:backgroundTint="@color/peach"
+        android:elevation="20dp" />
+
     <EditText
-        android:id="@+id/registerUsernameEditText"
+        android:id="@+id/updateUsernameEditText"
         android:layout_width="325dp"
         android:layout_marginTop="40dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:hint="Username"
-        android:layout_below="@id/logo_register_activity" />
+        android:hint="Update Username"
+        android:layout_below="@id/updateProfileImage" />
 
     <EditText
-        android:id="@+id/registerFirstNameEditText"
+        android:id="@+id/updateFirstNameEditText"
         android:layout_width="325dp"
         android:layout_marginTop="35dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:layout_below="@id/registerUsernameEditText"
-        android:hint="First Name"
-       />
+        android:layout_below="@id/updateUsernameEditText"
+        android:hint="Update First Name"
+        />
 
     <EditText
-        android:id="@+id/registerSurnameEditText"
-        android:hint="Surname"
+        android:id="@+id/updateSurnameEditText"
+        android:hint="Update Surname"
         android:layout_width="325dp"
         android:layout_marginTop="35dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:layout_below="@id/registerFirstNameEditText"/>
+        android:layout_below="@id/updateFirstNameEditText"/>
+
 
 
     <EditText
-        android:id="@+id/registerEditTextTextEmailAddress"
+        android:id="@+id/updateEditTextTextPassword"
         android:layout_width="325dp"
         android:layout_marginTop="35dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_below="@id/registerSurnameEditText" />
-
-    <EditText
-        android:id="@+id/registerEditTextTextPassword"
-        android:layout_width="325dp"
-        android:layout_marginTop="35dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:hint="Password"
+        android:hint="Update Password"
         android:inputType="textPassword"
-        android:layout_below="@id/registerEditTextTextEmailAddress" />
+        android:layout_below="@id/updateSurnameEditText" />
 
     <EditText
-        android:id="@+id/registerEditTextTextPassword2"
+        android:id="@+id/updateEditTextTextPassword2"
         android:layout_width="325dp"
         android:layout_marginTop="35dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:layout_below="@id/registerEditTextTextPassword"
+        android:layout_below="@id/updateEditTextTextPassword"
         android:hint="Confirm Password"
         android:inputType="textPassword"/>
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/updateDetailsBtn"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@drawable/round_btn"
-        android:text="Register"
+        android:text="Update Details"
         android:textColorLink="@color/white"
         android:textSize="14sp"
         app:backgroundTint="@color/peach"

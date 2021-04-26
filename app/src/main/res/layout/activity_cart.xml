@@ -10,8 +10,8 @@
     <ImageView
         android:id="@+id/logo_cart_activity"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/screenshot_2021_02_17_at_15_13_58" />
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/peach_top_logo" />
 
     <TextView
         android:id="@+id/textViewCart"
@@ -50,11 +50,10 @@
 
     <Button
         android:id="@+id/checkoutButton"
-        android:elevation="50dp"
+        android:elevation="60dp"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@drawable/round_btn"
-        android:backgroundTint="#FC6161"
         android:text="Proceed to Checkout"
         android:textColorLink="@color/white"
         android:textSize="14sp"

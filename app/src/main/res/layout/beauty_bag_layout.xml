@@ -8,14 +8,14 @@
     android:background="@drawable/round_item">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewBB"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/round_img"
         android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
-        app:srcCompat="@drawable/cosmetics" />
+         />
 
     <TextView
         android:id="@+id/nameTextViewBB"
@@ -43,6 +43,16 @@
         android:textSize="14sp"
         android:layout_below="@id/nameTextViewBB"
         android:layout_toRightOf="@id/imageViewBB"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/biryani_light"
+        android:id="@+id/priceTextViewBB"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_margin="15dp"/>
     <TextView
         android:id="@+id/shadeTextViewBB"
         android:layout_width="wrap_content"

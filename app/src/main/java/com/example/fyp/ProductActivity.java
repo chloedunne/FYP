@@ -89,8 +89,12 @@ public class ProductActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
             shadeText.setText("Shades");
+
+            if(shadeList.isEmpty())
+                selectedProduct = product;
         }else{
-            shadeText.setText("Shade:" + product.getShade());
+            selectedProduct = product;
+            shadeText.setText("Shade:" + product.getShade().getName());
         }
 
 
@@ -180,6 +184,8 @@ public class ProductActivity extends AppCompatActivity {
                     Toast.makeText(ProductActivity.this, "Please select a product shade", Toast.LENGTH_LONG).show();
             }
         });
+
+
 
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override

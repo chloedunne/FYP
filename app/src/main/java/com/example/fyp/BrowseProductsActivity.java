@@ -207,11 +207,11 @@ public class BrowseProductsActivity extends AppCompatActivity {
                                 Shade shade = new Shade(shadeName, colour);
                                 shadesArray.add(shade);
                             }
-                            Product product = new Product(brand, name, description, productType, image, shadesArray, id, price);
-                            productList.add(product);
-                            adapter.notifyDataSetChanged();
-
-
+                            if(price != 0) {
+                                Product product = new Product(brand, name, description, productType, image, shadesArray, id, price);
+                                productList.add(product);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
