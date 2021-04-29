@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            BeautyBag beautyBag = new BeautyBag(userID);
+                            BeautyBag beautyBag = new BeautyBag();
 
                             FirebaseDatabase.getInstance().getReference("Beauty Bag")
                                     .child(userID)

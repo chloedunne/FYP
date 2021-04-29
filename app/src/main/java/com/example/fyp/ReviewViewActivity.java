@@ -84,8 +84,9 @@ public class ReviewViewActivity extends AppCompatActivity {
 
             }
         });
-
-        shadeText.setText("Shade: " + review.getProduct().getShade().getName());
+        if(review.getProduct().getShade()!=null){
+            shadeText.setText("Shade: " + review.getProduct().getShade().getName());
+        }
         productText.setText(review.getProduct().getName());
         productBrandText.setText(review.getProduct().getBrand());
         descriptionTextView.setText(review.getDescription());

@@ -11,11 +11,7 @@ public class BeautyBag {
 
     public BeautyBag(){
     }
-
-    public BeautyBag(String userID) {
-        this.products = products;
-        this.userID = userID;
-    }
+    
 
     public String getUserID() {
         return userID;

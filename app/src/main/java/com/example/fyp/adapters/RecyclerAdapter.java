@@ -20,12 +20,10 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
     private ArrayList<Product> productList;
-    private ArrayList<Product> productListFull;
     private RecyclerViewClickListener listener;
 
     public RecyclerAdapter(ArrayList<Product> productList, RecyclerViewClickListener listener){
         this.productList = productList;
-        productListFull = new ArrayList<>(productList);
         this.listener = listener;
     }
 

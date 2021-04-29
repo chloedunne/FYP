@@ -63,8 +63,9 @@ public class RecyclerAdapterReview extends RecyclerView.Adapter<RecyclerAdapterR
         holder.productTextView.setText(currentReview.getProduct().getName());
         holder.brandTextView.setText(currentReview.getProduct().getBrand());
         holder.ratingBar.setRating((float) currentReview.getReview());
-        holder.shadeNameTextView.setText(currentReview.getProduct().getShade().getName());
         Picasso.get().load(currentReview.getProduct().getImg()).into(holder.reviewImage);
+        if(currentReview.getProduct().getShade()!= null)
+        holder.shadeNameTextView.setText(currentReview.getProduct().getShade().getName());
     }
 
     public int getItemCount() {

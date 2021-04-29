@@ -72,15 +72,14 @@
         android:textColor="@color/white"
         android:textSize="16sp"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewProfile"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_below="@id/shadeTextView"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/round_img"
-        app:srcCompat="@drawable/ic_baseline_person_outline_24"
+        android:background="@drawable/ic_baseline_person_outline_24"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView

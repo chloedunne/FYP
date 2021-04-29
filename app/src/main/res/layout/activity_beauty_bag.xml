@@ -25,10 +25,22 @@
         android:layout_below="@id/logo_beauty_bag_activity"
         android:layout_centerHorizontal="true"/>
 
+    <SearchView
+        android:id="@+id/searchBB"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/textViewBeautyBag"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/clear_button"
+        android:elevation="5dp">
+    </SearchView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewBeautyBag"
+        android:layout_below="@id/searchBB"
         android:layout_marginTop="5dp"
         >
 

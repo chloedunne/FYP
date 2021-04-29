@@ -74,7 +74,7 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
         //sets colour
         augmentedFaceRenderer.setShade(product.getShade().getColour());
 
-        // Set up renderer.
+        // Set up renderer
         surfaceView.setPreserveEGLContextOnPause(true);
         surfaceView.setEGLContextClientVersion(2);
         //tracks face

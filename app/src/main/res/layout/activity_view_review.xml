@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peach"
-        android:layout_below="@id/textViewReview" />
+        android:layout_below="@id/searchReviews" />
 
     <TextView
         android:id="@+id/textViewReview"
@@ -30,4 +30,16 @@
         android:textSize="16sp"
         android:layout_below="@id/logo_view_reviews_activity"
         android:layout_centerHorizontal="true"/>
+
+    <SearchView
+        android:id="@+id/searchReviews"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/textViewReview"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/clear_button"
+        android:elevation="5dp">
+    </SearchView>
 </RelativeLayout>

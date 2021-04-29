@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
@@ -62,6 +63,8 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        DecimalFormat df = new DecimalFormat("###.##");
+
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,7 +73,7 @@ public class CartActivity extends AppCompatActivity {
                     Product p = child.getValue(Product.class);
                     productList.add(p);
                     total = total + p.getPrice();
-                    totalTextView.setText("Total: " + String.valueOf(total));
+                    totalTextView.setText("Total: " + String.valueOf(df.format(total)));
                     adapter.notifyDataSetChanged();
                 }
             }

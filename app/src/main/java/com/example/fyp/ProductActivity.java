@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class ProductActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private TextView brandText, ratingTextView, productText, favouriteText, shadeText, cartText;
+    private TextView brandText, ratingTextView, productText, favouriteText, shadeText, cartText, priceTextView, descriptionTextview;
     private Button favouriteButton, createReviewButton, tryOnButton, cartButton;
     private ArrayList<Shade> shadeList = new ArrayList<Shade>();
     private RatingBar ratingBarReviewReview;
@@ -75,6 +75,8 @@ public class ProductActivity extends AppCompatActivity {
         shadeText = findViewById(R.id.textViewShade);
         cartText = findViewById(R.id.cartTextView);
         cartButton = findViewById(R.id.addToCartButton);
+        priceTextView = findViewById(R.id.priceTextView);
+        descriptionTextview = findViewById(R.id.descriptionTextView);
 
         if (product.getShades() != null) {
             setOnClickListener();
@@ -90,11 +92,18 @@ public class ProductActivity extends AppCompatActivity {
             }
             shadeText.setText("Shades");
 
-            if(shadeList.isEmpty())
+            if (shadeList.isEmpty()) {
                 selectedProduct = product;
-        }else{
+                shadeText.setText("");
+                checkIfInBeautyBag();
+            }
+        } else {
             selectedProduct = product;
-            shadeText.setText("Shade:" + product.getShade().getName());
+            selectedShade = product.getShade();
+            if(product.getShade()!= null) {
+                shadeText.setText("Shade:" + product.getShade().getName());
+            }
+            checkIfInBeautyBag();
         }
 
 
@@ -123,6 +132,8 @@ public class ProductActivity extends AppCompatActivity {
         Picasso.get().load(product.getImg()).into(productImage);
         productText.setText(product.getName());
         brandText.setText(product.getBrand());
+        descriptionTextview.setText(product.getDescription());
+        priceTextView.setText("€ " + String.valueOf(product.getPrice()));
 
 
         createReviewButton.setOnClickListener(new View.OnClickListener() {
@@ -155,14 +166,16 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedProduct != null) {
-                    if (favouriteText.getText().length() == 20) {
-                        beautyBagRef.addValueEventListener(new ValueEventListener() {
+                    if (favouriteText.getText().toString().equalsIgnoreCase("Added to Beauty Bag!")) {
+                        beautyBagRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot child : snapshot.getChildren()) {
                                     Product p = child.getValue(Product.class);
                                     if (p.getId() == selectedProduct.getId()) {
-                                        if (p.getShade().getName().equalsIgnoreCase(selectedShade.getName())) {
+                                        if (p.getShade() == null) {
+                                            removeFromBeautyBag(child.getKey());
+                                        } else if (p.getShade().getName().equalsIgnoreCase(selectedShade.getName())) {
                                             removeFromBeautyBag(child.getKey());
                                         }
                                     }
@@ -174,9 +187,7 @@ public class ProductActivity extends AppCompatActivity {
                                 Toast.makeText(ProductActivity.this, "Error loading page", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
-                    } else {
+                    } else if (favouriteText.getText().toString().equalsIgnoreCase("Add to Beauty Bag")) {
                         addToBeautyBag();
 
                     }
@@ -186,11 +197,10 @@ public class ProductActivity extends AppCompatActivity {
         });
 
 
-
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedProduct!=null){
+                if (selectedProduct != null) {
                     String keyId = cartRef.push().getKey();
                     cartRef.child(keyId).setValue(selectedProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -228,39 +238,45 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
+    public void checkIfInBeautyBag() {
+        beautyBagRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Product p = child.getValue(Product.class);
+                    if (p.getId() == selectedProduct.getId()) {
+                        if (p.getShade() == null) {
+                            favouriteButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                            favouriteText.setText("Added to Beauty Bag!");
+                        } else if (p.getShade().getName().equalsIgnoreCase(selectedShade.getName())) {
+                            favouriteButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                            favouriteText.setText("Added to Beauty Bag!");
+                        } else {
+                            favouriteButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                            favouriteText.setText("Add to Beauty Bag");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProductActivity.this, "Error loading page", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void setOnClickListener() {
         clickListener = new RecyclerAdapterShades.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
                 selectedShade = shadeList.get(position);
+                selectedShade.setId(product.getId());
                 selectedProduct = new Product(product.getBrand(), product.getName(), product.getDescription(), product.getProductType(), product.getImg(), selectedShade, product.getId(), product.getPrice());
                 adapter.setCheckedPosition(position);
                 adapter.notifyDataSetChanged();
-
-                beautyBagRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot child : snapshot.getChildren()) {
-                            Product p = child.getValue(Product.class);
-                            if (p.getId() == selectedProduct.getId()) {
-                                if (p.getShade().getName().equalsIgnoreCase(selectedShade.getName())) {
-                                    favouriteButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-                                    favouriteText.setText("Added to Beauty Bag!");
-                                    break;
-                                } else {
-                                    favouriteButton.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-                                    favouriteText.setText("Add to Beauty Bag");
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(ProductActivity.this, "Error loading page", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                checkIfInBeautyBag();
             }
         };
     }

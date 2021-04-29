@@ -46,6 +46,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private OkHttpClient httpClient = new OkHttpClient();
     private String paymentIntentClientSecret;
     private double total;
+    private int totalInt;
     private RecyclerAdapterBeautyBag.RecyclerViewClickListener clickListener;
     private ArrayList<Product> productList = new ArrayList<Product>();
     private RecyclerAdapterBeautyBag adapter;
@@ -77,6 +79,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private FirebaseUser user;
     private EditText editTextAddress;
     private Button payButton;
+    private DecimalFormat df = new DecimalFormat("###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +89,16 @@ public class CheckoutActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         total = i.getDoubleExtra("total", 0);
+        totalInt = (int) total* 100;
+
+        total = Double.valueOf(df.format(total));
 
         recyclerView = findViewById(R.id.orderProductRCV);
         orderTotal = findViewById(R.id.orderTotal);
         editTextAddress = findViewById(R.id.editTextAddress);
         payButton = findViewById(R.id.payButton);
         dbRef = FirebaseDatabase.getInstance().getReference("Cart").child(user.getUid());
-        orderTotal.setText("Total: " + String.valueOf(total));
+        orderTotal.setText("Total: €" + String.valueOf(total));
 
         adapter = new RecyclerAdapterBeautyBag(productList, clickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(CheckoutActivity.this));
@@ -119,13 +125,13 @@ public class CheckoutActivity extends AppCompatActivity {
                 getApplicationContext(),
                 Objects.requireNonNull("pk_test_51IIYYWLkp6zbh2pArwlS2ZnHLhw4GIR4qquQdxcV00Gu9c8Ruczq22jom8S0yYrmvGVA5ttOUvR2NfWbBXbBcMn500qo2g7Ox2")
         );
-        total = total * 100;
+
         startCheckout();
     }
 
+
     private void startCheckout() {
 
-        // Create a PaymentIntent by calling the server's endpoint.
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         Map<String, Object> payMap = new HashMap<>();
         Map<String, Object> itemMap = new HashMap<>();
@@ -133,7 +139,7 @@ public class CheckoutActivity extends AppCompatActivity {
         List<Map<String,Object>> itemList = new ArrayList<>();
 
         payMap.put("currency", "eur");
-        itemMap.put("amount", total);
+        itemMap.put("amount", totalInt);
         itemList.add(itemMap);
         payMap.put("items", itemList);
         String json = new Gson().toJson(payMap);
@@ -145,17 +151,14 @@ public class CheckoutActivity extends AppCompatActivity {
         httpClient.newCall(request)
                 .enqueue(new PayCallback(CheckoutActivity.this));
 
-        // Hook up the pay button to the card widget and stripe instance
-
         payButton.setOnClickListener((View view) -> {
-            CardInputWidget cardInputWidget = findViewById(R.id.cardInput);
-            PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
-            if (params != null) {
-                ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
-                        .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
-                stripe.confirmPayment(this, confirmParams);
-            }
-        });
+                CardInputWidget cardInputWidget = findViewById(R.id.cardInput);
+                PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
+                if (params != null) {
+                    ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
+                            .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
+                    stripe.confirmPayment(this, confirmParams);
+            }});
     }
 
     private void displayAlert(@NonNull String title,
@@ -172,7 +175,6 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Handle the result of stripe.confirmPayment
         stripe.onPaymentResult(requestCode, data, new PaymentResultCallback(CheckoutActivity.this));
     }
 
@@ -255,16 +257,13 @@ public class CheckoutActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("Orders").child(orderRef).setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
-
+                        Toast.makeText(activity, "Payment Completed", Toast.LENGTH_LONG).show();
+                        FirebaseDatabase.getInstance().getReference("Cart").removeValue();
+                        Intent i = new Intent(CheckoutActivity.this,OrderCompleteActivity.class);
+                        i.putExtra("order", order);
+                        startActivity(i);
                     }
                 });
-                activity.displayAlert(
-                        "Payment Completed",
-                        "Order Number: " + order.getOrderNum()
-                );
-                FirebaseDatabase.getInstance().getReference("Cart").removeValue();
-                Intent i = new Intent(CheckoutActivity.this,ProfileActivity.class);
-                startActivity(i);
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(

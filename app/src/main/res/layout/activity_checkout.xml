@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
         android:text="Shipping Address:"
@@ -51,7 +51,7 @@
     <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="70dp"
+        android:layout_marginHorizontal="100dp"
         android:layout_height="wrap_content"
         android:inputType="textPostalAddress"
         android:layout_below="@id/addressText"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/orderDetails"
         android:text="Order Details"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@id/editTextAddress"
         android:textColor="@color/black"
         android:fontFamily="@font/biryani_light"
@@ -71,7 +71,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/orderTotal"
         android:layout_below="@id/orderDetails"
         android:id="@+id/orderProductRCV"/>
 
@@ -82,10 +83,11 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="Total: "
         android:textColor="@color/peach"
         android:textSize="16sp"
-        android:layout_below="@id/orderProductRCV"
+        android:layout_above="@id/payButton"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -95,7 +97,7 @@
         app:backgroundTint="@color/peach"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginVertical="40dp"
+        android:layout_marginBottom="40dp"
         android:text="Pay Now"
         android:id="@+id/payButton"/>
 

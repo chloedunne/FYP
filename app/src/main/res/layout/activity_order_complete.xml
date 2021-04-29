@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderCompleteActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/logo_order_activity"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/white_top_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank you for your order!"
+        android:fontFamily="@font/biryani_light"
+        android:layout_marginTop="50dp"
+        android:id="@+id/orderDetailsView"
+        android:layout_below="@id/logo_order_activity"
+        android:textColor="@color/peach"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Order Number:"
+        android:textSize="18sp"
+        android:id="@+id/orderCompleteNumber"
+        android:layout_below="@id/orderDetailsView"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Shipping Address:"
+        android:id="@+id/orderCompleteAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/orderCompleteNumber"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:text="Order Total:"
+        android:id="@+id/orderCompleteTotal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/orderCompleteAddress"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/round_btn"
+        app:backgroundTint="@color/peach"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/orderCompleteTotal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="100dp"
+        android:text="Return to Profile Page"
+        android:id="@+id/homeButton"/></RelativeLayout>
+
+
+</ScrollView>

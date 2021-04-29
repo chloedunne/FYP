@@ -27,8 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYP"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderActivity"></activity>
-        <activity android:name=".ViewOrdersActivity"></activity>
+        <activity android:name=".OrderCompleteActivity"></activity>
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".ViewOrdersActivity" />
         <activity android:name=".UpdateActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CheckoutActivity" />

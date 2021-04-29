@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.fyp.adapters.RecyclerAdapterBeautyBag;
 import com.example.fyp.objects.Order;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderActivity extends AppCompatActivity {
@@ -36,9 +37,11 @@ public class OrderActivity extends AppCompatActivity {
         orderTotal = findViewById(R.id.orderTotal);
         recyclerView = findViewById(R.id.rcvOrderDetails);
 
+        DecimalFormat df = new DecimalFormat("###.##");
+
         orderNumber.setText("Order Number:  " + order.getOrderNum());
         orderAddress.setText("Shipping Address:  " + order.getAddress());
-        orderTotal.setText("Order Total:  " + String.valueOf(order.getTotal()/100));
+        orderTotal.setText("Order Total:  €" + String.valueOf(df.format(order.getTotal())));
 
         adapter = new RecyclerAdapterBeautyBag(productList, clickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(OrderActivity.this));

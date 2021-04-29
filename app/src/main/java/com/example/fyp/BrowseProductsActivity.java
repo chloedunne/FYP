@@ -11,8 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Spinner;
 
 
 import com.android.volley.DefaultRetryPolicy;
@@ -34,7 +37,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class BrowseProductsActivity extends AppCompatActivity {
 
@@ -84,6 +91,7 @@ public class BrowseProductsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         loadProducts();
+
 
         blush.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,26 +156,26 @@ public class BrowseProductsActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                filteredProducts.clear();
 
-                ArrayList<Product> filteredProducts = new ArrayList<Product>();
 
-                for(Product p : productList){
-                    if(p.getName().toLowerCase().contains(newText.toLowerCase()) || p.getProductType().toLowerCase().contains(newText.toLowerCase())){
+                for (Product p : productList) {
+                    if (p.getName().toLowerCase().contains(newText.toLowerCase()) || p.getProductType().toLowerCase().contains(newText.toLowerCase())) {
                         filteredProducts.add(p);
                     }
 
                     RecyclerAdapter filteredAdapter = new RecyclerAdapter(filteredProducts, clickListener);
                     recyclerView.setAdapter(filteredAdapter);
                 }
-               return false;
+                return false;
             }
         });
     }
 
-    public void filterProducts(String productType){
+    public void filterProducts(String productType) {
         filteredProducts.clear();
-        for(Product p : productList){
-            if(p.getProductType().equalsIgnoreCase(productType)){
+        for (Product p : productList) {
+            if (p.getProductType().equalsIgnoreCase(productType)) {
                 filteredProducts.add(p);
             }
             RecyclerAdapter filteredAdapter = new RecyclerAdapter(filteredProducts, clickListener);
@@ -196,18 +204,21 @@ public class BrowseProductsActivity extends AppCompatActivity {
                             String image = jsonObject.getString("image_link");
                             String stringPrice = jsonObject.getString("price");
                             double price = 0;
-                            if(stringPrice != null && !stringPrice.equals("null")){
+                            if (stringPrice != null && !stringPrice.equals("null")) {
                                 price = Double.parseDouble(stringPrice);
+                                price = roundTwoDecimals(price);
                             }
                             JSONArray shades = jsonObject.getJSONArray("product_colors");
                             for (int x = 0; x < shades.length(); x++) {
                                 JSONObject shadeDetails = shades.getJSONObject(x);
                                 String shadeName = shadeDetails.getString("colour_name");
                                 String colour = shadeDetails.getString("hex_value");
-                                Shade shade = new Shade(shadeName, colour);
-                                shadesArray.add(shade);
+                                if (Pattern.compile("[#][a-zA-Z0-9]{6}$").matcher(colour).matches()) {
+                                    Shade shade = new Shade(shadeName, colour);
+                                    shadesArray.add(shade);
+                                }
                             }
-                            if(price != 0) {
+                            if (price != 0 && !brand.equals("null")) {
                                 Product product = new Product(brand, name, description, productType, image, shadesArray, id, price);
                                 productList.add(product);
                                 adapter.notifyDataSetChanged();
@@ -233,12 +244,17 @@ public class BrowseProductsActivity extends AppCompatActivity {
         }
     }
 
+    public double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.valueOf(twoDForm.format(d));
+    }
+
     private void setOnClickListener() {
         clickListener = new RecyclerAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
                 Product product;
-                if(filteredProducts.isEmpty())
+                if (filteredProducts.isEmpty())
                     product = productList.get(position);
                 else
                     product = filteredProducts.get(position);

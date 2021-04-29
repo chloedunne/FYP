@@ -51,7 +51,7 @@ public class RecyclerAdapterOrder extends RecyclerView.Adapter<RecyclerAdapterOr
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Order current = orderList.get(position);
 
-        holder.total.setText("Total: " + String.valueOf(current.getTotal()/100));
+        holder.total.setText("Total: €" + String.valueOf(current.getTotal()));
         holder.orderNum.setText("Order Number: " + String.valueOf(current.getOrderNum()));
     }
 

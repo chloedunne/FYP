@@ -17,11 +17,11 @@
         android:layout_marginBottom="5dp"
         app:srcCompat="@drawable/peach_top_logo" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/faceImageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_height="400dp"
+        android:layout_height="550dp"
         android:layout_below="@id/logo_shade_match_activity"
         android:layout_centerHorizontal="true"
         android:background="@color/light_peach"

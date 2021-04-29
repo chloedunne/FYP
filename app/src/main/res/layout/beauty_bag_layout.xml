@@ -8,7 +8,7 @@
     android:background="@drawable/round_item">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewBB"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -61,7 +61,6 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/biryani_light"
-        android:text="Shade"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:layout_below="@id/brandTextViewBB"

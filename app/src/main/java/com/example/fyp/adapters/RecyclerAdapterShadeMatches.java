@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp.R;
 import com.example.fyp.objects.Product;
-import com.example.fyp.objects.ShadeMatch;
 
 import java.util.ArrayList;
 
@@ -57,10 +56,6 @@ public class RecyclerAdapterShadeMatches extends RecyclerView.Adapter<RecyclerAd
         return list.size();
     }
 
-    public void addItemtoEnd(Product shadeMatch){
-        list.add(shadeMatch);
-        notifyItemInserted(list.size());
-    }
 
 
 }

@@ -33,13 +33,10 @@ import com.android.volley.toolbox.Volley;
 import com.example.fyp.adapters.RecyclerAdapterShadeMatches;
 import com.example.fyp.objects.Product;
 import com.example.fyp.objects.Shade;
-import com.example.fyp.objects.ShadeMatch;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.gson.JsonObject;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceDetection;
@@ -67,8 +64,6 @@ public class ShadeMatchActivity extends AppCompatActivity {
     private ArrayList<Shade> shadeList = new ArrayList<Shade>();
     private PointF leftPoint = null;
     private PointF rightPoint = null;
-    private String rightColour = null;
-    private String leftColour = null;
     private Shade closest = null;
     private RecyclerAdapterShadeMatches adapter;
     private RecyclerView recyclerView;
@@ -127,7 +122,6 @@ public class ShadeMatchActivity extends AppCompatActivity {
 
 
             FaceDetector detector = FaceDetection.getClient(highAccuracyOpts);
-
             Task<List<Face>> result =
                     detector.process(image)
                             .addOnSuccessListener(
@@ -143,13 +137,11 @@ public class ShadeMatchActivity extends AppCompatActivity {
                                                 FaceLandmark rightCheek = f.getLandmark(FaceLandmark.RIGHT_CHEEK);
                                                 if (leftCheek != null) {
                                                     leftPoint = leftCheek.getPosition();
-                                                    leftColour = findColour(leftPoint);
                                                     Shade leftShade = closestShade(leftPoint);
                                                      getProductByShade(leftShade);
                                                 }
                                                 if (rightCheek != null) {
                                                     rightPoint = rightCheek.getPosition();
-                                                    rightColour = findColour(rightPoint);
                                                     Shade rightShade = closestShade(rightPoint);
                                                      getProductByShade(rightShade);
                                                 }
@@ -168,17 +160,6 @@ public class ShadeMatchActivity extends AppCompatActivity {
                                         }
                                     });
         }
-    }
-
-    public String findColour(PointF point) {
-        int x = (int) point.x;
-        int y = (int) point.y;
-        int pixel = bitmap.getPixel(x, y);
-        int red = Color.red(pixel);
-        int green = Color.green(pixel);
-        int blue = Color.blue(pixel);
-        String hex = String.format("#%02x%02x%02x", red, green, blue);
-        return hex;
     }
 
     public void getProductByShade(Shade shadeMatch) {
@@ -290,7 +271,7 @@ public class ShadeMatchActivity extends AppCompatActivity {
 
     public Shade closestShade(PointF point) {
         double distance = 0;
-        double closestDist = 100000;
+        double closestDist = 999999;
 
         int x = (int) point.x;
         int y = (int) point.y;
@@ -298,7 +279,6 @@ public class ShadeMatchActivity extends AppCompatActivity {
         int red = Color.red(pixel);
         int green = Color.green(pixel);
         int blue = Color.blue(pixel);
-
 
         for (Shade s : shadeList) {
             String colour = s.getColour();
@@ -313,7 +293,6 @@ public class ShadeMatchActivity extends AppCompatActivity {
                 closest = s;
             }
         }
-
         return closest;
     }
 
