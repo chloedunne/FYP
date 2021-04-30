@@ -11,9 +11,7 @@
         android:id="@+id/imageViewReviewRCV"
         android:layout_width="100dp"
         android:layout_margin="5dp"
-        android:layout_height="100dp"
-        android:background="@drawable/round_img"
-        app:srcCompat="@drawable/round_img" />
+        android:layout_height="100dp" />
 
     <RatingBar
         android:id="@+id/ratingBarReview"

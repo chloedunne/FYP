@@ -12,7 +12,6 @@
         android:id="@+id/imageViewBB"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/round_img"
         android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
          />

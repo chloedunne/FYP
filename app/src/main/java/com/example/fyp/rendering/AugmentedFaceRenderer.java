@@ -10,6 +10,7 @@ import android.opengl.GLUtils;
 import android.opengl.Matrix;
 
 import com.google.ar.core.AugmentedFace;
+
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -41,7 +42,7 @@ public class AugmentedFaceRenderer {
 
     private final int[] textureId = new int[1];
 
-    private static final float[] lightDirection = new float[] {0.0f, 1.0f, 0.0f, 0.0f};
+    private static final float[] lightDirection = new float[]{0.0f, 1.0f, 0.0f, 0.0f};
     private static final String VERTEX_SHADER_NAME = "shaders/object.vert";
     private static final String FRAGMENT_SHADER_NAME = "shaders/object.frag";
     private int program;
@@ -52,15 +53,19 @@ public class AugmentedFaceRenderer {
     private int tintColorUniform = 0;
     private float[] tintColor;
 
-    public AugmentedFaceRenderer() {}
+    public AugmentedFaceRenderer() {
+    }
 
-    public void setShade(String shade){
+    public void setShade(String shade) {
+
         int color_base = Color.parseColor(shade);
+
         int red = Color.red(color_base);
         int green = Color.green(color_base);
         int blue = Color.blue(color_base);
         int alpha = Color.alpha(color_base);
-        tintColor = new float[] {(red / 255f), (green / 255f), (blue / 255f), (alpha / 255f)};
+
+        tintColor = new float[]{(red / 255f), (green / 255f), (blue / 255f), (alpha / 255f)};
 
     }
 
@@ -128,7 +133,7 @@ public class AugmentedFaceRenderer {
         Matrix.multiplyMM(modelViewProjectionMat, 0, modelViewProjectionMatTemp, 0, modelmtx, 0);
         Matrix.multiplyMM(modelViewMat, 0, viewmtx, 0, modelmtx, 0);
 
-        // Set the lighting environment properties.
+
         Matrix.multiplyMV(viewLightDirection, 0, modelViewMat, 0, lightDirection, 0);
         normalizeVec3(viewLightDirection);
 
@@ -140,10 +145,9 @@ public class AugmentedFaceRenderer {
                 1.f);
         GLES20.glUniform4fv(colorCorrectionParameterUniform, 1, colorCorrectionRgba, 0);
 
-        // Set the object material properties.
+
         GLES20.glUniform4f(materialParametersUniform, ambient, diffuse, specular, specularPower);
 
-        // Set the ModelViewProjection matrix in the shader.
         GLES20.glUniformMatrix4fv(modelViewUniform, 1, false, modelViewMat, 0);
         GLES20.glUniformMatrix4fv(modelViewProjectionUniform, 1, false, modelViewProjectionMat, 0);
 
@@ -169,14 +173,6 @@ public class AugmentedFaceRenderer {
 
         GLES20.glUseProgram(0);
         GLES20.glDepthMask(true);
-    }
-
-    public void setMaterialProperties(
-            float ambient, float diffuse, float specular, float specularPower) {
-        this.ambient = ambient;
-        this.diffuse = diffuse;
-        this.specular = specular;
-        this.specularPower = specularPower;
     }
 
     private static void normalizeVec3(float[] v) {

@@ -32,7 +32,6 @@ import java.nio.FloatBuffer;
 public class BackgroundRenderer {
     private static final String TAG = BackgroundRenderer.class.getSimpleName();
 
-    // Shader names.
     private static final String CAMERA_VERTEX_SHADER_NAME = "shaders/screenquad.vert";
     private static final String CAMERA_FRAGMENT_SHADER_NAME = "shaders/screenquad.frag";
     private static final String DEPTH_VISUALIZER_VERTEX_SHADER_NAME =
@@ -96,7 +95,7 @@ public class BackgroundRenderer {
             int vertexShader =
                     ShaderUtil.loadGLShader(TAG, context, GLES20.GL_VERTEX_SHADER, CAMERA_VERTEX_SHADER_NAME);
             int fragmentShader =
-                   ShaderUtil.loadGLShader(
+                    ShaderUtil.loadGLShader(
                             TAG, context, GLES20.GL_FRAGMENT_SHADER, CAMERA_FRAGMENT_SHADER_NAME);
 
             cameraProgram = GLES20.glCreateProgram();
@@ -112,7 +111,6 @@ public class BackgroundRenderer {
             ShaderUtil.checkGLError(TAG, "Program parameters");
         }
 
-       // Load render depth map shader.
         {
             int vertexShader =
                     ShaderUtil.loadGLShader(
@@ -186,16 +184,16 @@ public class BackgroundRenderer {
         float[] texCoordTransformed;
         switch (cameraToDisplayRotation) {
             case 90:
-                texCoordTransformed = new float[] {1 - u, 1 - v, 1 - u, v, u, 1 - v, u, v};
+                texCoordTransformed = new float[]{1 - u, 1 - v, 1 - u, v, u, 1 - v, u, v};
                 break;
             case 180:
-                texCoordTransformed = new float[] {1 - u, v, u, v, 1 - u, 1 - v, u, 1 - v};
+                texCoordTransformed = new float[]{1 - u, v, u, v, 1 - u, 1 - v, u, 1 - v};
                 break;
             case 270:
-                texCoordTransformed = new float[] {u, v, u, 1 - v, 1 - u, v, 1 - u, 1 - v};
+                texCoordTransformed = new float[]{u, v, u, 1 - v, 1 - u, v, 1 - u, 1 - v};
                 break;
             case 0:
-                texCoordTransformed = new float[] {u, 1 - v, 1 - u, 1 - v, u, v, 1 - u, v};
+                texCoordTransformed = new float[]{u, 1 - v, 1 - u, 1 - v, u, v, 1 - u, v};
                 break;
             default:
                 throw new IllegalArgumentException("Unhandled rotation: " + cameraToDisplayRotation);
@@ -232,7 +230,7 @@ public class BackgroundRenderer {
             GLES20.glUseProgram(cameraProgram);
             GLES20.glUniform1i(cameraTextureUniform, 0);
 
-            // Set the vertex positions and texture coordinates.
+
             GLES20.glVertexAttribPointer(
                     cameraPositionAttrib, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, quadCoords);
             GLES20.glVertexAttribPointer(
@@ -243,7 +241,7 @@ public class BackgroundRenderer {
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
-        // Disable vertex arrays
+
         if (debugShowDepthMap) {
             GLES20.glDisableVertexAttribArray(depthPositionAttrib);
             GLES20.glDisableVertexAttribArray(depthTexCoordAttrib);
@@ -252,15 +250,15 @@ public class BackgroundRenderer {
             GLES20.glDisableVertexAttribArray(cameraTexCoordAttrib);
         }
 
-        // Restore the depth state for further drawing.
+
         GLES20.glDepthMask(true);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-       ShaderUtil.checkGLError(TAG, "BackgroundRendererDraw");
+        ShaderUtil.checkGLError(TAG, "BackgroundRendererDraw");
     }
 
     private static final float[] QUAD_COORDS =
-            new float[] {
+            new float[]{
                     -1.0f, -1.0f, +1.0f, -1.0f, -1.0f, +1.0f, +1.0f, +1.0f,
             };
 }

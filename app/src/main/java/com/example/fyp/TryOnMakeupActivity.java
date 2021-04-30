@@ -6,17 +6,21 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraManager;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.fyp.helpers.DisplayRotationHelper;
 import com.example.fyp.objects.Product;
 import com.example.fyp.rendering.AugmentedFaceRenderer;
 import com.example.fyp.rendering.BackgroundRenderer;
@@ -44,7 +48,7 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceView.Renderer {
+public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceView.Renderer, DisplayManager.DisplayListener {
 
     private Product product;
 
@@ -56,10 +60,16 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
     private boolean installRequested;
 
     private Session session;
-    private DisplayRotationHelper displayRotationHelper;
 
     private final BackgroundRenderer backgroundRenderer = new BackgroundRenderer();
     private final AugmentedFaceRenderer augmentedFaceRenderer = new AugmentedFaceRenderer();
+
+    private boolean viewportChanged;
+    private int viewportWidth;
+    private int viewportHeight;
+    private  Display display;
+    private  DisplayManager displayManager;
+    private  CameraManager cameraManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +79,19 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
         Intent i = getIntent();
         product = (Product) i.getSerializableExtra("product");
 
-        displayRotationHelper = new DisplayRotationHelper(TryOnMakeupActivity.this);
+        //Sets display
+        displayManager = (DisplayManager) this.getSystemService(Context.DISPLAY_SERVICE);
+        cameraManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
+        WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        display = windowManager.getDefaultDisplay();
 
-        //sets colour
+        //Sets colour
         augmentedFaceRenderer.setShade(product.getShade().getColour());
 
         // Set up renderer
         surfaceView.setPreserveEGLContextOnPause(true);
         surfaceView.setEGLContextClientVersion(2);
-        //tracks face
+        //Tracks face
         surfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
         surfaceView.setRenderer(this);
         surfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
@@ -85,6 +99,7 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
 
         installRequested = false;
     }
+
 
     @Override
     protected void onDestroy() {
@@ -113,11 +128,11 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
                 }
 
                 if (ContextCompat.checkSelfPermission(TryOnMakeupActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions((Activity)TryOnMakeupActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                    ActivityCompat.requestPermissions((Activity) TryOnMakeupActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
                 }
 
-                // Create the session and configure it to use a front-facing (selfie) camera.
-                session = new Session(/* context= */ this, EnumSet.noneOf(Session.Feature.class));
+                // Creates front camera session
+                session = new Session(TryOnMakeupActivity.this, EnumSet.noneOf(Session.Feature.class));
                 CameraConfigFilter cameraConfigFilter = new CameraConfigFilter(session);
                 cameraConfigFilter.setFacingDirection(CameraConfig.FacingDirection.FRONT);
                 List<CameraConfig> cameraConfigs = session.getSupportedCameraConfigs(cameraConfigFilter);
@@ -156,20 +171,20 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
         try {
             session.resume();
         } catch (CameraNotAvailableException e) {
-            Toast.makeText(TryOnMakeupActivity.this,"Camera not available", Toast.LENGTH_LONG ).show();
+            Toast.makeText(TryOnMakeupActivity.this, "Camera not available", Toast.LENGTH_LONG).show();
             session = null;
             return;
         }
 
         surfaceView.onResume();
-        displayRotationHelper.onResume();
+        displayManager.registerDisplayListener(this, null);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         if (session != null) {
-            displayRotationHelper.onPause();
+            displayManager.unregisterDisplayListener(this);
             surfaceView.onPause();
             session.pause();
         }
@@ -194,28 +209,22 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        //FullScreenHelper.setFullScreenOnWindowFocusChanged(this, hasFocus);
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-
-        // Prepare the rendering objects. This involves reading shaders, so may throw an IOException.
         try {
-            // Create the texture and pass it to ARCore session to be filled during update().
-            backgroundRenderer.createOnGlThread(/*context=*/ this);
-            if(product.getProductType().equalsIgnoreCase("blush") || product.getProductType().equalsIgnoreCase("bronzer"))
-                augmentedFaceRenderer.createOnGlThread(this, "models/contour.png");
-            else if(product.getProductType().equalsIgnoreCase("eyeshadow"))
-                augmentedFaceRenderer.createOnGlThread(this, "models/eyeShadow.png");
-            else if(product.getProductType().equalsIgnoreCase("lip_liner") || product.getProductType().equalsIgnoreCase("lipstick"))
-                augmentedFaceRenderer.createOnGlThread(this, "models/lips3.png");
-            else if(product.getProductType().equalsIgnoreCase("eyeliner"))
-                augmentedFaceRenderer.createOnGlThread(this, "models/liner.png");
-
-            augmentedFaceRenderer.setMaterialProperties(0.0f, 1.0f, 0.1f, 6.0f);
+            backgroundRenderer.createOnGlThread(TryOnMakeupActivity.this);
+            if (product.getProductType().equalsIgnoreCase("blush") || product.getProductType().equalsIgnoreCase("bronzer"))
+                augmentedFaceRenderer.createOnGlThread(TryOnMakeupActivity.this, "models/contour.png");
+            else if (product.getProductType().equalsIgnoreCase("eyeshadow"))
+                augmentedFaceRenderer.createOnGlThread(TryOnMakeupActivity.this, "models/eyeShadow.png");
+            else if (product.getProductType().equalsIgnoreCase("lip_liner") || product.getProductType().equalsIgnoreCase("lipstick"))
+                augmentedFaceRenderer.createOnGlThread(TryOnMakeupActivity.this, "models/lips.png");
+            else if (product.getProductType().equalsIgnoreCase("eyeliner"))
+                augmentedFaceRenderer.createOnGlThread(TryOnMakeupActivity.this, "models/liner.png");
 
         } catch (IOException e) {
             Log.e(TAG, "Failed to read an asset file", e);
@@ -224,21 +233,26 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        displayRotationHelper.onSurfaceChanged(width, height);
+        viewportWidth = width;
+        viewportHeight = height;
+        viewportChanged = true;
         GLES20.glViewport(0, 0, width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        // Clear screen to notify driver it should not load any pixels from previous frame.
+        // Clears screen
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         if (session == null) {
             return;
         }
-        // Notify ARCore session that the view size changed so that the perspective matrix and
-        // the video background can be properly adjusted.
-        displayRotationHelper.updateSessionIfNeeded(session);
+        //Notify session if view has changed
+        if (viewportChanged) {
+            int displayRotation = display.getRotation();
+            session.setDisplayGeometry(displayRotation, viewportWidth, viewportHeight);
+            viewportChanged = false;
+        }
 
         try {
             session.setCameraTextureName(backgroundRenderer.getTextureId());
@@ -293,5 +307,20 @@ public class TryOnMakeupActivity extends AppCompatActivity implements GLSurfaceV
         Config config = new Config(session);
         config.setAugmentedFaceMode(Config.AugmentedFaceMode.MESH3D);
         session.configure(config);
+    }
+
+    @Override
+    public void onDisplayAdded(int displayId) {
+
+    }
+
+    @Override
+    public void onDisplayRemoved(int displayId) {
+
+    }
+
+    @Override
+    public void onDisplayChanged(int displayId) {
+        viewportChanged = true;
     }
 }

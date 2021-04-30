@@ -160,7 +160,7 @@ public class BrowseProductsActivity extends AppCompatActivity {
 
 
                 for (Product p : productList) {
-                    if (p.getName().toLowerCase().contains(newText.toLowerCase()) || p.getProductType().toLowerCase().contains(newText.toLowerCase())) {
+                    if (p.getName().toLowerCase().contains(newText.toLowerCase()) || p.getBrand().toLowerCase().contains(newText.toLowerCase())) {
                         filteredProducts.add(p);
                     }
 

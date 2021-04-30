@@ -205,12 +205,12 @@ public class UpdateActivity extends AppCompatActivity {
             return;
         }
 
-        if (!password.equalsIgnoreCase(confirmPassword)) {
-            editTextConfirmPassword.setError("Passwords must match");
-            editTextPassword.requestFocus();
+        if (confirmPassword.isEmpty()) {
+            editTextConfirmPassword.setError("Confirm Password is required");
             editTextConfirmPassword.requestFocus();
             return;
         }
+
 
         FirebaseDatabase.getInstance().getReference("Profiles").addValueEventListener(new ValueEventListener() {
             @Override
@@ -218,6 +218,11 @@ public class UpdateActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Profile p = child.getValue(Profile.class);
                     if (!child.getKey().equalsIgnoreCase(user.getUid())) {
+                        if (p.getPassword()!=confirmPassword){
+                            editTextConfirmPassword.setError("Must confirm password to make changes. Confirm old password if you wish to update.");
+                            editTextConfirmPassword.requestFocus();
+                            return;
+                        }
                         if (p.getUsername().equalsIgnoreCase(username)) {
                             editTextUsername.setError("Username is already taken");
                             editTextUsername.requestFocus();

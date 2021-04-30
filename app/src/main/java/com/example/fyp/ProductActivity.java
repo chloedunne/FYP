@@ -153,9 +153,14 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedProduct != null) {
-                    Intent i = new Intent(ProductActivity.this, TryOnMakeupActivity.class);
-                    i.putExtra("product", (Serializable) selectedProduct);
-                    startActivity(i);
+                    if(selectedProduct.getShade() == null || selectedProduct.getProductType().equalsIgnoreCase("eyebrow")
+                    || selectedProduct.getProductType().equalsIgnoreCase("mascara") || selectedProduct.getProductType().equalsIgnoreCase("foundation")) {
+                        Toast.makeText(ProductActivity.this, "Try on feature not available for this product", Toast.LENGTH_LONG).show();
+                    }else{
+                        Intent i = new Intent(ProductActivity.this, TryOnMakeupActivity.class);
+                        i.putExtra("product", (Serializable) selectedProduct);
+                        startActivity(i);
+                    }
                 } else
                     Toast.makeText(ProductActivity.this, "Please select a product shade", Toast.LENGTH_LONG).show();
 
